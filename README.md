@@ -19,12 +19,14 @@ location.
 # Usage
 
 The script requires two input files:
+
 1. a tab-delimited text file containing pedigree data with one
 individual per row (the raw rile)
 2. a one-column text file containing individuals for whom the pedigree
 will be constructed with one individual per row (the register file).
 
 The script produces three output files:
+
 1. a tab-delimited text file containing the minimum amount of
 individuals needed to construct the pedigree
 2. a GEDCOM 5.5 format file with the minimum individuals
