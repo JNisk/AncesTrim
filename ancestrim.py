@@ -387,7 +387,7 @@ genopro_id = 0
 for i in minimum_data:
 	genopro_id += 1
 	i["genopro_id"] = str("@I" + str(genopro_id) + "@")
-
+	
 write_gedcom(file_names["--out"],work_dir,minimum_data,"_clean")
 print("wrote gedcom file to " + str(file_names["--out"] + "_clean.ged"))
 
@@ -397,3 +397,4 @@ print("wrote pruned data file to " + str(file_names["--out"] + "_pruned.txt"))
 write_log(file_names["--out"],file_names["--raw"],file_names["--register"],work_dir,raw_data,minimum_data,discarded_dogs,register_list,file_names["--gen"])
 print("wrote log file to " + str(file_names["--out"] + ".log"))
 
+print("wrote files to folder " + str(work_dir))
