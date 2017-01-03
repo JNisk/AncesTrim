@@ -10,7 +10,7 @@ genealogical information.
 
 This script has been tested with Python 2.6.6 in a Linux environment,
 and compatibility with other versions or operating systems is not
-guaranteed. There are no modules that need to be installed.
+guaranteed. There are no Python modules that need to be installed.
 
 # Installation
 
