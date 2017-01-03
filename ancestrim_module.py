@@ -99,7 +99,7 @@ def open_registerfile(regfile,folder):
 			register_data.append([handle_unicode(line[0]),handle_unicode(line[1])])
 		except IndexError:
 			register_data.append(handle_unicode(line[0]))
-		return register_data
+	return register_data
 
 ########## write to gedcom file
 
