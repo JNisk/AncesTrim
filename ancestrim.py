@@ -37,7 +37,7 @@ register_list = open_registerfile(file_names["--register"],work_dir)
 # discard old registers if a two-column register list is used
 try:
 	register_list = [item[1] for item in register_list]
-except KeyError:
+except IndexError:
 	pass
 
 print("constructing pedigree for these " + str(len(register_list)) + " dogs:")
