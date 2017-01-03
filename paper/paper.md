@@ -7,9 +7,7 @@ tags:
 authors:
  - name: Julia Niskanen
    orcid: 0000-0002-2871-6890
-   affiliation: 1
-   affiliation: 2
-   affiliation: 3
+   affiliation: 1, 2, 3
 affiliations:
  - name: Department of Veterinary Biosciences, University of Helsinki, Helsinki, Finland
    index: 1
