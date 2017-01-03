@@ -1,4 +1,4 @@
-# AncesTrim tool
+# AncesTrim
 
 This tool is used to trim complex pedigree data and produce a minimum
 pedigree while preserving critical relatedness information. It is
