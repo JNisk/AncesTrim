@@ -30,7 +30,6 @@ for i in raw_data:
 	for j in raw_data[i].keys():
 		if j not in raw_columns:
 			raw_columns.append(j)
-print(raw_columns)
 
 ### open register file
 register_list = open_registerfile(file_names["--register"],work_dir)
