@@ -11,12 +11,12 @@
     }
   ],
   "identifier": "",
-  "codeRepository": "",
+  "codeRepository": "https://github.com/JNisk/AncesTrim",
   "datePublished": "2017-01-03",
   "dateModified": "2017-01-03",
   "dateCreated": "2016-01-03",
-  "description": "Ancestrim - a tool for trimming complex pedigrees",
-  "keywords": "pedigree, Python, genetics",
+  "description": "AncesTrim - a tool for trimming complex pedigrees",
+  "keywords": "genealogy, Python, genetics",
   "license": "MIT",
   "title": "AncesTrim",
   "version": "v1.0"
