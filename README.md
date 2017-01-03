@@ -91,6 +91,8 @@ are essential for the pedigree.
 ancestor, then those paths are essential for the pedigree.
 3. If a queried individual has an ancestor that is present in more than
 one path, then those paths are essential for the pedigree.
+4. If two queried individuals are directly related to each other, then
+that path is essential for the pedigree.
 
 To further elaborate on the concept of essential paths, not all
 individuals on a given path are informative. For example, a common
