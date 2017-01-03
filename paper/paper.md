@@ -23,6 +23,12 @@ bibliography: paper.bib
 
 # Summary
 
-AncesTrim is a tool for trimming complex pedigrees. Some pedigree data may have an inherently complicated structure with hig
+AncesTrim (Niskanen 2017) is a Python tool for trimming complex pedigrees. Some pedigree data
+can have an inherently complicated structure with a high level of inbreeding, which makes
+visualization of such data difficult. AncesTrim reduces the complexity of pedigrees while
+preserving critical relatedness structures, allowing the pedigree to be displayed in a more
+efficient way.
 
 # References
+
+Niskanen, J. (2017). AncesTrim - a tool for trimming complex pedigrees. https://github.com/JNisk/AncesTrim.
