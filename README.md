@@ -111,7 +111,7 @@ the script. The functions include:
 * open_rawfile: Open raw file and write its contents to a dict object.
 * open_registerfile: Open register file and write to a list.
 * parse_commandline: Parse parameters from command line with syntax
---option [filename] and return a dict object.
+--option [value] and return a dict object.
 * write_gedcom: Take a filename, folder and list of pedigree data dicts
 and write to GEDCOM file format (.ged).
 * write_raw:  Take a filename, folder, a list of pedigree data dicts and
