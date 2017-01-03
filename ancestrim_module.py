@@ -94,9 +94,12 @@ def open_registerfile(regfile,folder):
 	register_data = []
 	for line in o:
 		line = line.rstrip("\n").split("\t")
-		if len(line) == 2:
+		# if a two-column list is in use, append both register numbers
+		try:
 			register_data.append([handle_unicode(line[0]),handle_unicode(line[1])])
-	return register_data
+		except IndexError:
+			register_data.append(handle_unicode(line[0]))
+		return register_data
 
 ########## write to gedcom file
 
