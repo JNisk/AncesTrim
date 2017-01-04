@@ -64,7 +64,7 @@ pedigree if they don't match any of the script's relatedness evaluation
 criteria.
 
 As a demonstration, running this script with the example raw file that
-consists of 40 individuals and the example register file of two
+consists of 46 individuals and the example register file of two
 individuals, a trimmed pedigree is created that includes 22 individuals
 when using a generation parameter of 4. The script can be run using the
 example data with the following command:
