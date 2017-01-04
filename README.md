@@ -98,7 +98,7 @@ that path is essential for the pedigree.
 To further elaborate on the concept of essential paths, not all
 individuals on a given path are informative. For example, a common
 ancestor of two individuals is important, but that ancestor's parents
-may not necessarily be informative. Finally, one the minimum
+may not necessarily be informative. Finally, once the minimum
 individuals are collected, mates for all individuals are included
 unless an individual is in the lowest position in all of its paths.
 
