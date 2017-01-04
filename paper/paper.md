@@ -9,7 +9,7 @@ authors:
    orcid: 0000-0002-2871-6890
    affiliation: 1, 2, 3
  - name: Elina Salmela
-   orcid: 
+   orcid: 0000-0003-1326-4462
    affiliation: 1, 2, 3, 4
  - name: Hannes Lohi
    orcid: 0000-0003-1087-5532
