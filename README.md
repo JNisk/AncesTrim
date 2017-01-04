@@ -65,7 +65,7 @@ criteria.
 
 As a demonstration, running this script with the example raw file that
 consists of 40 individuals and the example register file of two
-individuals, a trimmed pedigree is created that includes 24 individuals
+individuals, a trimmed pedigree is created that includes 22 individuals
 when using a generation parameter of 4. The script can be run using the
 example data with the following command:
 
