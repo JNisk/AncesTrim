@@ -63,10 +63,11 @@ individual might nonetheless be discarded from the final output
 pedigree if they don't match any of the script's relatedness evaluation
 criteria.
 
-As a demonstration, running this script with the example data that
-consists of 40 individuals, a trimmed pedigree is created that includes
-24 individuals when using a generation parameter of 4. The script can
-be run using the example data with the following command:
+As a demonstration, running this script with the example raw file that
+consists of 40 individuals and the example register file of two
+individuals, a trimmed pedigree is created that includes 24 individuals
+when using a generation parameter of 4. The script can be run using the
+example data with the following command:
 
 ```
 python ancestrim.py --folder example_data --raw example1_raw.txt
