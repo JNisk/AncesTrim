@@ -8,9 +8,6 @@ authors:
  - name: Julia Niskanen
    orcid: 0000-0002-2871-6890
    affiliation: 1, 2, 3
- - name: Hannes Lohi
-   orcid: 0000-0003-1087-5532
-   affiliation: 1, 2, 3
  - name: Elina Salmela
    orcid: 
    affiliation: 1, 2, 3, 4
