@@ -1,10 +1,10 @@
 # AncesTrim
 
-AncesTrim is a Python tool used to trim complex pedigree data and produce a pruned
-pedigree while preserving critical relatedness information. This
-enables visualization of complicated pedigrees using genealogy software.
-AncesTrim is intended for genetics researchers and others who work with
-genealogical information.
+AncesTrim is a Python tool used to trim complex pedigree data and
+produce a pruned pedigree while preserving critical relatedness
+information. This enables better visualization of complicated pedigrees
+using genealogy software. AncesTrim is intended for genetics
+researchers and others who work with genealogical information.
 
 # Requirements
 
