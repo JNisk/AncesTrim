@@ -10,7 +10,7 @@ authors:
    affiliation: 1, 2, 3
  - name: Hannes Lohi
    orcid: 0000-0003-1087-5532
-   affiliation: 1,2,3
+   affiliation: 1, 2, 3
 affiliations:
  - name: Department of Veterinary Biosciences, University of Helsinki, Helsinki, Finland
    index: 1
