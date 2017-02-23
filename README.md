@@ -167,6 +167,8 @@ julia.niskanen@helsinki.fi.
 * The first section of README has been updated to be more descriptive,
 and an image of an example pedigree before and after trimming has been
 added
+* The "Pedigree trimming principles" section has been updated with an
+image to make it more demonstrative
 * Input file parsing has been improved to catch errors due to empty
 lines or missing columns
 * A command line parameter "--help" has been added 
