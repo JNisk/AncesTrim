@@ -6,6 +6,18 @@ information. This enables better visualization of complicated pedigrees
 using genealogy software. AncesTrim is intended for genetics
 researchers and others who work with genealogical information.
 
+The basic principle of AncesTrim is that in a pedigree with a high
+degree of inbreeding, some individuals are more informative than
+others. For example, if two individuals are related to each other via
+a common ancestor, then that ancestor is important but that ancestor's
+parents may not necessarily be. The same is true when an individual is
+related to itself via an ancestor. To demonstrate the difference that
+trimming a pedigree makes, an image of an example pedigree of 46
+individuals before and after trimming has been been included:
+
+![An image of an example pedigree before (A) and after (B) trimming.]
+(example_image.png)
+
 # Requirements
 
 This script has been tested with Python 2.6.6 in a Linux environment,
@@ -22,7 +34,7 @@ location.
 The script requires two input files:
 
 1. a tab-delimited text file containing pedigree data with one
-individual per row (the raw rile)
+individual per row (the raw file)
 2. a one-column text file containing individuals for whom the pedigree
 will be constructed with one individual per row (the register file).
 
@@ -39,16 +51,14 @@ The package includes example data that is located in the example_data
 folder. To run the script, type the following on the command line:
 
 ```
-python ancestrim.py --folder [folder name] --raw [raw file name]
+python ancestrim.py --outfolder [folder name] --raw [raw file name]
 --register [register file name] --out [output file name] --gen [N]
 ```
 
-The folder name indicates the location of the input files and the
-destination of the output files. As for now, the use of the folder
-parameter is mandatory and there is no possibility to have the input
-and output files in different folders. The raw and register file names
-refer to the input files, e.g. `example1_raw.txt` and
-`example1_register.txt.`
+The outfolder name indicates the destination of the output files.
+Optionally, an `--infolder` parameter can be used to indicate the
+location of the input files. The raw and register file names refer
+to the input files, e.g. `example1_raw.txt` and `example1_register.txt.`
 
 The output file name is the intended name for the files that will be
 produced. Do not include any filename extensions in this, as they will
@@ -72,6 +82,13 @@ example data with the following command:
 ```
 python ancestrim.py --folder example_data --raw example1_raw.txt
 --register example1_register.txt --out test1 --gen 4
+```
+
+Information about the parameters can also be called directly from the
+command line by typing:
+
+```
+python ancestrim.py --help
 ```
 
 ## Pedigree trimming principles
@@ -133,5 +150,20 @@ For contributions, bug reports or support contact
 julia.niskanen@helsinki.fi.
 
 # Changelog
+
+1.1 Minor modifications and fixes:
+* The first section of README has been updated to be more descriptive,
+and an image of an example pedigree before and after trimming has been
+added
+* Input file parsing has been improved to catch errors due to empty
+lines or missing columns
+* A command line parameter "--help" has been added 
+* The "--folder" parameter has been split to the obligatory
+"--outfolder" parameter and the optional "--infolder" parameter
+* README has been updated to reflect the changes in the command line
+parameters
+* Some comment blocks have been added to ancestrim.py in an attempt to
+make the code more readable
+* A typo in README has been fixed
 
 1.0 Initial publication.
