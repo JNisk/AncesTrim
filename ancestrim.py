@@ -12,7 +12,11 @@ print("----------\n")
 ### parse file names from command line
 file_names = parse_commandline()
 current_dir = str(os.getcwd() + "/")
-work_dir = str(current_dir + file_names["--folder"] + "/")
+out_dir = str(current_dir + file_names["--outfolder"] + "/")
+try:
+	in_dir = str(current_dir + file_names["--infolder"] + "/")
+except KeyError:
+	in_dir = current_dir
 
 ### parse generation parameter
 try:
@@ -23,7 +27,11 @@ except ValueError:
 	func_exit()
 
 ### open raw file
-raw_data = open_rawfile(file_names["--raw"],work_dir)
+raw_data = open_rawfile(file_names["--raw"],in_dir)
+if len(raw_data) == 0:
+	print("raw data file is empty or contains only header line")
+	print("please check raw file")
+	exit(0)
 
 raw_columns = []
 for i in raw_data:
@@ -32,12 +40,25 @@ for i in raw_data:
 			raw_columns.append(j)
 
 ### open register file
-register_list = open_registerfile(file_names["--register"],work_dir)
+register_list = open_registerfile(file_names["--register"],in_dir)
+if len(register_list) == 0:
+	print("register file contains no individuals")
+	print("please check register file")
+	exit(0)
+
 # discard old registers if a two-column register list is used
 try:
 	register_list = [item[1] for item in register_list]
 except IndexError:
 	pass
+
+### check that all individuals in register file are also in raw file
+for i in register_list:
+	if i not in raw_data:
+		print("individual " + str(i) + " not in raw file")
+		print("cannot construct pedigree for " + str(i))
+		print("exiting...")
+		exit(0)
 
 print("constructing pedigree for these " + str(len(register_list)) + " dogs:")
 print(register_list)
@@ -229,19 +250,28 @@ print("\ntrimming self-related paths")
 self_ancestors_trimmed = {}
 
 iterations = 0
+# a binary index is created for all paths per individual
+# for example, 001010 means that a given individual
+# is related to itself by 3rd and 5th generation parents, but not by 6th
+# thus, 6th generation parents are dropped from the path and not given essential status 
 for i in register_list:
 	iterations += 1
 	print_progress(iterations)
 	self_ancestors_trimmed[i] = []
+	# check every path
 	for p in self_paths[i]:
 		binary_index = []
+		# check if an ancestor causes self-relatedness
+		# binary index 1 if yes, 0 otherwise
 		for q in p:
 			if q in self_ancestors[i]:
 				binary_index.append("1")
 			else:
 				binary_index.append("0")
 		binary_index = ''.join(binary_index)
+		# trim indexes by removing trailing zeros
 		binary_index = (binary_index.rstrip("0").rstrip("1")) + "1"
+		# add parents up to the last one with index of 1
 		if p[:len(binary_index)] not in self_ancestors_trimmed[i]:
 			self_ancestors_trimmed[i].append(p[:len(binary_index)])
 
@@ -253,14 +283,17 @@ print("\ndetecting direct ancestors")
 direct_ancestors = {}
 
 iterations = 0
+# see if two queried individuals are on the same path
 for i in path_dict:
 	direct_ancestors[i] = []
 	iterations += 1
 	print_progress(iterations)
 	other_registers = list(path_dict.keys())
 	other_registers.remove(i)
+	# check every path
 	for p in path_dict[i]:
 		for q in p:
+			# if another query individual is in the path, add it to essentials
 			if q in other_registers:
 				if p[:p.index(q)+1] not in direct_ancestors[i]:
 					direct_ancestors[i].append(p[:p.index(q)+1])
@@ -388,13 +421,13 @@ for i in minimum_data:
 	genopro_id += 1
 	i["genopro_id"] = str("@I" + str(genopro_id) + "@")
 	
-write_gedcom(file_names["--out"],work_dir,minimum_data,"_clean")
+write_gedcom(file_names["--out"],out_dir,minimum_data,"_clean")
 print("wrote gedcom file to " + str(file_names["--out"] + "_clean.ged"))
 
-write_raw(file_names["--out"],work_dir,minimum_data,raw_columns,"pruned")
+write_raw(file_names["--out"],out_dir,minimum_data,raw_columns,"pruned")
 print("wrote pruned data file to " + str(file_names["--out"] + "_pruned.txt"))
 
-write_log(file_names["--out"],file_names["--raw"],file_names["--register"],work_dir,raw_data,minimum_data,discarded_dogs,register_list,file_names["--gen"])
+write_log(file_names["--out"],file_names["--raw"],file_names["--register"],in_dir,out_dir,raw_data,minimum_data,discarded_dogs,register_list,file_names["--gen"])
 print("wrote log file to " + str(file_names["--out"] + ".log"))
 
-print("wrote files to folder " + str(work_dir))
+print("wrote files to folder " + str(out_dir))
