@@ -163,7 +163,7 @@ julia.niskanen@helsinki.fi.
 
 # Changelog
 
-1.1 Minor modifications and fixes:
+1.1 Minor modifications and fixes as per the suggestions of @jyuan1322:
 * The first section of README has been updated to be more descriptive,
 and an image of an example pedigree before and after trimming has been
 added
