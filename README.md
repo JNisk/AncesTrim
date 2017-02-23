@@ -115,6 +115,15 @@ one path, then those paths are essential for the pedigree.
 4. If two queried individuals are directly related to each other, then
 that path is essential for the pedigree.
 
+Criteria 2, 3 and 4 have been demonstrated in an example image, where
+the queried individual has been marked with black fill, essential
+ancestors with a blue background and white fill and essential
+ancestors' mates with white fill. Uninformative individuals are marked
+with grey fill. Image A represents rule 2, B represents rule 3 and C
+represents rule 4.
+
+![The trimming principles of AncesTrim.](example_data/example_image2.png)
+
 To further elaborate on the concept of essential paths, not all
 individuals on a given path are informative. For example, a common
 ancestor of two individuals is important, but that ancestor's parents
