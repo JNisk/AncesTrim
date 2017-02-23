@@ -119,7 +119,7 @@ Criteria 2, 3 and 4 have been demonstrated in an example image, where
 the queried individual has been marked with black fill, essential
 ancestors with a blue background and white fill and essential
 ancestors' mates with white fill. Uninformative individuals are marked
-with grey fill. Image A represents rule 2, B represents rule 3 and C
+with grey fill. Image A represents rule 3, B represents rule 2 and C
 represents rule 4.
 
 ![The trimming principles of AncesTrim.](example_data/example_image2.png)
