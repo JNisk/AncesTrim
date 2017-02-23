@@ -16,7 +16,10 @@ trimming a pedigree makes, an image of an example pedigree of 46
 individuals before and after trimming has been been included:
 
 ![An image of an example pedigree before (A) and after (B) trimming.]
-(example_image.png)
+(example_data/example_image.png)
+
+For more detailed information about the trimming principles of
+AncesTrim, see section Pedigree trimming principles.
 
 # Requirements
 
