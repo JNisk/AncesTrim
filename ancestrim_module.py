@@ -36,7 +36,24 @@ def handle_unicode(name):
 
 def parse_commandline():
 	"""Parse parameters from command line with syntax --option [filename] and return a dict object."""
-	def_args = {"--out":"output file name", "--folder":"subfolder"}
+	if "--help" in sys.argv:
+		help_dict = {}
+		help_dict["--raw"] = "File name of the file that contains pedigree information."
+		help_dict["--register"] = "File name of the file that contains the list of individuals for whom the pedigree will be constructed."
+		help_dict["--gen"] = "A numeric parameter that determines the maximum number of generations that will be included in the pedigree."
+		help_dict["--out"] = "File name for the output files that will be generated, without a filename extension."
+		help_dict["--outfolder"] = "Folder name for output files."
+		print("AncesTrim v1.1\n..............\n")
+		print("The following command line parameters are required to run the script:")
+		for i in help_dict:
+			print(" " + i + "  " + help_dict[i])
+		help_opt_dict = {}
+		help_opt_dict["--infolder"] = "Folder name for input files."
+		print("\nThe following optional parameter can also be used:")
+		for i in help_opt_dict:
+			print(" " + i + "  " + help_opt_dict[i])
+		exit(0)
+	def_args = {"--out":"output file name", "--outfolder":"subfolder"}
 	if "ancestrim" in sys.argv[0]:
 		def_args["--raw"] = "raw file"
 		def_args["--register"] = "register file"
@@ -49,18 +66,22 @@ def parse_commandline():
 		if d not in arg_keys:
 			print("missing option " + str(d))
 			print("please specify " + str(def_args[d]) + " with " + str(d))
+			print("\nfor help with command line parameters, use the parameter --help")
 			func_exit()
 	arg_options = {}
 	for i in arguments:
 		#assign options as keys and file names as values in dict arg_options
 		try:
-			for j in ["--out","--folder","--gen","--raw","--register"]:
+			for j in ["--out","--outfolder","--gen","--raw","--register"]:
 				if str(i[0]) == j:
 					arg_options[j] = str(i[1])
 		except IndexError:
 			print("error in options, please check command line")
 			func_exit()
-        forbidden_characters = ["\\","/",":","*","?",'"',"<",">","|","#"]
+		# optionally, include argument --infolder
+		if str(i[0]) == "--infolder":
+			arg_options[str(i[0])] = str(i[1])
+	forbidden_characters = ["\\","/",":","*","?",'"',"<",">","|","#"]
 	for i in forbidden_characters:
 		if i in arg_options["--out"]:
 			print('invalid outfile name: file names cannot contain \/:*?"<>|#')
@@ -76,12 +97,19 @@ def open_rawfile(rawfile,folder):
 	o = open((str(folder) + str(rawfile)),"r")
 	header = o.readline().strip().split("\t")
 	dog_data = {}
+	line_count = 1
 	for line in o:
+		line_count += 1
 		line = line.rstrip("\n").split("\t")
 		line = [i.rstrip() for i in line]
 		tmp = {}
 		for i in header:
-			tmp[i] = handle_unicode(line[header.index(i)])
+			try:
+				tmp[i] = handle_unicode(line[header.index(i)])
+			except IndexError:
+				print("error in reading raw file on line " + str(line_count))
+				print("please check raw file")
+				exit(0)
 		dog_data[tmp["REGISTER_NUMBER"]] = tmp
 	return dog_data
 
@@ -90,15 +118,21 @@ def open_rawfile(rawfile,folder):
 def open_registerfile(regfile,folder):
 	"""Open register file and write its contents to a list object."""
 	o = open((str(folder) + str(regfile)),"r")
-	o.next()
+	try:
+		o.next()
+	except StopIteration:
+		print("register file is empty")
+		print("please check register file")
+		exit(0)
 	register_data = []
 	for line in o:
 		line = line.rstrip("\n").split("\t")
-		# if a two-column list is in use, append both register numbers
-		try:
-			register_data.append([handle_unicode(line[0]),handle_unicode(line[1])])
-		except IndexError:
-			register_data.append(handle_unicode(line[0]))
+		if len(line[0]) > 0:
+			# if a two-column list is in use, append both register numbers
+			try:
+				register_data.append([handle_unicode(line[0]),handle_unicode(line[1])])
+			except IndexError:
+				register_data.append(handle_unicode(line[0]))
 	return register_data
 
 ########## write to gedcom file
@@ -111,7 +145,7 @@ def write_gedcom(outfile,folder,dog_list,clean=""):
 	### write initial lines to file
 	o.write("0 HEAD\n")
 	o.write("1 SOUR (c) Niskanen, J. 2017\n")
-	o.write("2 VERS 1.0\n")
+	o.write("2 VERS 1.1\n")
 	o.write("2 DATE 03.01.2017\n")
 	o.write("1 DEST GenoPro 2011\n")
 	o.write("1 FILE " + str(outfile) + "\n")
@@ -203,14 +237,14 @@ def write_raw(outfile,folder,dog_list,config=[],pruned=""):
 
 ########## write to log file
 
-def write_log(outfile,raw_file,register_file,folder,raw_data,minimum_data,discarded,register_list,gen):
+def write_log(outfile,raw_file,register_file,infolder,outfolder,raw_data,minimum_data,discarded,register_list,gen):
 	"""Write information about the run to a log file."""
 	minimum_regs = [i["REGISTER_NUMBER"] for i in minimum_data]
 	minimum_regs.sort()
 	discarded.sort()
-	o = open(str((folder + outfile) + ".log"),"w")
+	o = open(str((outfolder + outfile) + ".log"),"w")
 	o.write("finished run at " + str(time.strftime("%d.%m.%Y %H:%M:%S")) + "\n")
-	o.write("read data from folder: " + str(folder) + "\n")
+	o.write("read data from folder: " + str(infolder) + "\n")
 	o.write("read raw file from: " + str(raw_file) + "\n")
 	o.write("read register file from: " + str(register_file) + "\n\n")
 	o.write("constructed pedigree for " + str(len(register_list)) + " dogs:\n")
@@ -232,4 +266,5 @@ def write_log(outfile,raw_file,register_file,folder,raw_data,minimum_data,discar
 	o.write("\nwrote gedcom file to: " + str(outfile) + "_clean.ged\n")
 	o.write("wrote pruned data file to: " + str(outfile) + "_pruned.txt\n")
 	o.write("wrote log file to: " + str(outfile) + ".log\n")
+	o.write("wrote files to folder: " + str(outfolder) + "\n")
 	o.close()
