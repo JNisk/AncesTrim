@@ -54,7 +54,7 @@ The package includes example data that is located in the example_data
 folder. To run the script, type the following on the command line:
 
 ```
-python ancestrim.py --outfolder [folder name] --raw [raw file name]
+python ancestrim_v1-1.py --outfolder [folder name] --raw [raw file name]
 --register [register file name] --out [output file name] --gen [N]
 ```
 
@@ -83,7 +83,7 @@ when using a generation parameter of 4. The script can be run using the
 example data with the following command:
 
 ```
-python ancestrim.py --folder example_data --raw example1_raw.txt
+python ancestrim_v1-1.py --folder example_data --raw example1_raw.txt
 --register example1_register.txt --out test1 --gen 4
 ```
 
@@ -91,7 +91,7 @@ Information about the parameters can also be called directly from the
 command line by typing:
 
 ```
-python ancestrim.py --help
+python ancestrim_v1-1.py --help
 ```
 
 ## Pedigree trimming principles
