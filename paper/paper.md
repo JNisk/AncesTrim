@@ -1,5 +1,5 @@
 ---
-title: 'AncesTrim - a tool for trimming compled pedigrees'
+title: 'AncesTrim - a tool for trimming complex pedigrees'
 tags:
   - genealogy
   - Python
